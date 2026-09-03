@@ -1,0 +1,17 @@
+--v1.00.01
+
+Introduced,
+Single Linear Regression, Multivariate Linear Regression, Multiple Linear Regression
+location: ml_engine
+
+--v1.00.02
+
+Introduced,
+Logistic Regression 
+location: ml_engine
+
+--v1.00.03
+
+Introduced,
+K Nearest Neighbours
+location: ml_engine
