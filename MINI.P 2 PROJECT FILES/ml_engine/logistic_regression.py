@@ -34,6 +34,21 @@ class LogisticRegression:
     def parameter_update(self, grad_w, grad_b):
         self.w = self.w - self.lr*grad_w
         self.b = self.b - self.lr*grad_b
+    def classify(self, x):
+        predicted = self.predict(x)
+        classes = []
+        for probability in predicted:
+            if probability >= 0.5:
+                classes.append(1)
+            else:
+                classes.append(0)
+        return classes
+    def accuracy(self, y, predicted):
+        correct = 0
+        for i in range(len(y)):
+            if y[i] == predicted[i]:
+                correct += 1
+        return correct / len(y) *100
     def fit(self, x, y):
         for epoch in range(self.epochs):
             predicted = self.predict(x)
@@ -46,14 +61,19 @@ class LogisticRegression:
                 "weight": self.w,
                 "bias": self.b
             })
-            print("predicted: ",predicted)
+            print(epoch)
             print("loss: ", loss)
-            print("w: ", grad_w)
-            print("b: ", grad_b)
-
-x = [1,2,3]
-y = [0,1,1]
+x = [1, 2, 3, 5, 6, 2, 5, 3, 6, 3]
+y = [0, 1, 1, 1, 1, 0, 1, 0, 1, 0]
 model = LogisticRegression(0.01, 40000)
-result = model.fit(x, y)
-print(result)
+model.fit(x, y)
+predicted = model.classify(x)
+accuracy = model.accuracy(y, predicted)
+
+print("Predicted:", predicted)
+print("Actual:", y)
+print("Accuracy:", accuracy, "%")
+
+
+#p = max(min(predicted[i], 1 - 1e-15), 1e-15)
 
