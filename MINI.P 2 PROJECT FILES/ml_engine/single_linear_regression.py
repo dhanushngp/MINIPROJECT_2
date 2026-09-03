@@ -39,8 +39,8 @@ class LinearRegression:
 
 model = LinearRegression(0.01, 100)
 
-x = 5
-y = 20
+x = 16
+y = 24
 
 model.fit(x, y)
 

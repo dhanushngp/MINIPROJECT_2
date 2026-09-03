@@ -2,8 +2,9 @@ class MultipleLinearRegression:
     def __init__(self, learning_rate, epochs):
         self.learning_rate = learning_rate
         self.epochs = epochs
-        self. w = []
-        self. b = 0
+        self.w = []
+        self.b = 0
+        self.history = []
 
     def predict(self, x):
         predicted = []
@@ -49,7 +50,16 @@ class MultipleLinearRegression:
                 x, y, predicted
             )
             self.parameter(grad_w, grad_b)
-            print(f"{epoch + 1} {loss} {self.w} {self.b}")
+            print(f"{epoch + 1}")
+            print(f"Loss: {loss}")
+            print(f"W : {self.w}")
+            print(f"B : {self.b}")
+            self.history.append({
+                "epoch": epoch + 1,
+                "loss": loss,
+                "weights": self.w.copy(),
+                "bias": self.b
+            })
 
 x = [
     [1, 2],
@@ -60,7 +70,11 @@ x = [
 ]
 
 y = [5, 8, 11, 14, 17]
-
-model = MultipleLinearRegression(0.001, 1000)
-
+model = MultipleLinearRegression(0.01, 40000)
 model.fit(x, y)
+new_data = [
+    [6, 7],
+    [7, 8]
+]
+prediction = model.predict(new_data)
+print("Final Prediction:", prediction)
